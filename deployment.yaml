@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-rhel-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-rhel-app
+  template:
+    metadata:
+      labels:
+        app: my-rhel-app
+    spec:
+      containers:
+        # NOTE: The image URL and tag are intentionally left as a placeholder.
+        # The pipeline will replace this with the newly built image.
+        - name: rhel-container
+          image: image-registry.openshift-image-registry.svc:5000/my-project/my-rhel-app:latest
+          ports:
+            - containerPort: 8080
